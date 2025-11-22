@@ -58,7 +58,9 @@ export async function POST(request: Request) {
         id: user._id.toString(),
         name: user.name,
         email: user.email,
+        isVerified: user.isVerified,
       },
+      requiresVerification: !user.isVerified,
     });
   } catch (error) {
     console.error('Login error', error);

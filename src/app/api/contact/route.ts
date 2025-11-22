@@ -119,9 +119,9 @@ export async function POST(request: NextRequest) {
                 <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #1b88f2; margin: 15px 0;">
                   ${message.replace(/\n/g, '<br>')}
                 </div>
-                <p>If you have any urgent concerns, please don't hesitate to reach out to us directly at <a href="mailto:support@keyhive.com" style="color: #1b88f2;">support@keyhive.com</a></p>
+                <p>If you have any urgent concerns, please don't hesitate to reach out to us directly at <a href="mailto:support@keyhive.qzz.io" style="color: #1b88f2;">support@keyhive.qzz.io</a></p>
                 <div style="text-align: center;">
-                  <a href="http://localhost:3000" class="button">Visit KeyHive</a>
+                  <a href="https://keyhive.qzz.io" class="button">Visit KeyHive</a>
                 </div>
                 <div class="footer">
                   © 2024 KeyHive. All rights reserved.

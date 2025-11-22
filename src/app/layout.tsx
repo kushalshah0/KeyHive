@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <div className="relative min-h-screen bg-grid-light dark:bg-grid-dark">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(27,136,242,0.15),_transparent_45%)] dark:bg-[radial-gradient(circle_at_top,_rgba(27,136,242,0.3),_transparent_45%)]" />
-            <div className="pb-20">{children}</div>
+            <div className="pb-8">{children}</div>
             <footer className="relative z-10 border-t border-zinc-200/70 bg-white/80 px-6 py-8 text-center text-sm text-zinc-500 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-400">
               © {currentYear} KeyHive. Built for modern password security.
             </footer>

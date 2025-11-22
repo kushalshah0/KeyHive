@@ -9,13 +9,13 @@ const contactMethods = [
   {
     title: 'Email Support',
     description: 'Get help from our support team',
-    contact: 'support@keyhive.com',
+    contact: 'support@keyhive.qzz.io',
     icon: EnvelopeIcon,
   },
   {
     title: 'Sales Inquiries',
     description: 'Questions about plans or pricing',
-    contact: 'sales@keyhive.com',
+    contact: 'sales@keyhive.qzz.io',
     icon: ChatBubbleLeftRightIcon,
   },
   {

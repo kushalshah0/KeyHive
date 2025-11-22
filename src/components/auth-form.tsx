@@ -37,6 +37,23 @@ export const AuthForm = ({ mode }: { mode: Mode }) => {
         setError(data.error ?? 'Something went wrong');
         return;
       }
+
+      const data = await response.json();
+      
+      // Redirect to verify email page for signup with email parameter
+      if (mode === 'signup') {
+        router.push(`/verify-email?email=${encodeURIComponent(formValues.email)}`);
+        router.refresh();
+        return;
+      }
+      
+      // Show verification warning for login if not verified
+      if (mode === 'login' && data.requiresVerification) {
+        router.push(`/verify-email?email=${encodeURIComponent(formValues.email)}`);
+        router.refresh();
+        return;
+      }
+      
       router.push('/dashboard');
       router.refresh();
     });
@@ -45,7 +62,6 @@ export const AuthForm = ({ mode }: { mode: Mode }) => {
   return (
     <div className="mx-auto w-full max-w-md rounded-3xl border border-zinc-200 bg-white/90 p-8 shadow-2xl shadow-brand-500/10 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
       <div className="space-y-2 text-center">
-        <p className="text-xs uppercase tracking-[0.4em] text-brand-600 dark:text-brand-400">KeyHive</p>
         <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white">{copy.title}</h1>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
           {mode === 'login' ? 'Sign in to access your encrypted vault.' : 'Join other teams moving off spreadsheets.'}
@@ -74,7 +90,7 @@ export const AuthForm = ({ mode }: { mode: Mode }) => {
             value={formValues.email}
             onChange={(event) => setFormValues((prev) => ({ ...prev, email: event.target.value }))}
             className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-base text-zinc-900 outline-none transition focus:border-brand-500 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
-            placeholder="team@keyhive.app"
+            placeholder="user@keyhive.qzz.io"
           />
         </label>
         <label className="space-y-1 text-sm font-medium text-zinc-600 dark:text-zinc-300">
@@ -90,6 +106,15 @@ export const AuthForm = ({ mode }: { mode: Mode }) => {
           />
         </label>
         {error && <p className="text-sm text-red-500">{error}</p>}
+        
+        {mode === 'login' && (
+          <div className="text-right">
+            <Link href="/forgot-password" className="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">
+              Forgot password?
+            </Link>
+          </div>
+        )}
+        
         <button
           type="submit"
           disabled={isPending}

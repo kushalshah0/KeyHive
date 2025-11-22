@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import { AuthForm } from '@/components/auth-form';
+import { AuthNavbar } from '@/components/auth-navbar';
 
 export default function SignupPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
-      <Link href="/" className="mb-8 text-sm font-semibold text-brand-600 transition hover:text-brand-500 dark:text-brand-400">
-        ← Back to home
-      </Link>
-      <AuthForm mode="signup" />
-    </div>
+    <>
+      <AuthNavbar />
+      <div className="flex min-h-screen items-center justify-center px-4 pt-32 pb-8 sm:px-6 lg:px-8">
+        <AuthForm mode="signup" />
+      </div>
+    </>
   );
 }
 

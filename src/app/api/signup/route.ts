@@ -3,6 +3,7 @@ import { connectToDatabase } from '@/lib/db';
 import { User } from '@/models/User';
 import { hashPassword, setSession } from '@/lib/auth';
 import { signupSchema } from '@/lib/validators';
+import { sendVerificationEmail, generateToken } from '@/lib/email';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -43,7 +44,27 @@ export async function POST(request: Request) {
     }
 
     const passwordHash = await hashPassword(password);
-    const user = await User.create({ name, email: email.toLowerCase(), passwordHash });
+    
+    // Generate verification token
+    const verificationToken = generateToken();
+    const verificationTokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+    
+    const user = await User.create({ 
+      name, 
+      email: email.toLowerCase(), 
+      passwordHash,
+      isVerified: false,
+      verificationToken,
+      verificationTokenExpiry,
+    });
+
+    // Send verification email
+    try {
+      await sendVerificationEmail(user.email, user.name, verificationToken);
+    } catch (emailError) {
+      console.error('Failed to send verification email:', emailError);
+      // Continue with signup even if email fails
+    }
 
     await setSession({
       userId: user._id.toString(),
@@ -57,7 +78,9 @@ export async function POST(request: Request) {
           id: user._id.toString(),
           name: user.name,
           email: user.email,
+          isVerified: user.isVerified,
         },
+        message: 'Account created! Please check your email to verify your account.',
       },
       { status: 201 },
     );
