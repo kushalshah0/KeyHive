@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { AuthNavbar } from '@/components/auth-navbar';
+import AuthNavbar from '@/components/auth-navbar';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');

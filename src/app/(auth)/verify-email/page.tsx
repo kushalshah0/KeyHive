@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { AuthNavbar } from '@/components/auth-navbar';
+import AuthNavbar from '@/components/auth-navbar';
 
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
