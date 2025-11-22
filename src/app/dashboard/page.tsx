@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   await connectToDatabase();
   const entries = await PasswordEntry.find({ userId: user.id }).sort({ createdAt: -1 }).lean();
 
-  const initialEntries = entries.map((entry) => ({
+  const initialEntries = entries.map((entry: any) => ({
     id: entry._id.toString(),
     label: entry.label,
     username: entry.username,

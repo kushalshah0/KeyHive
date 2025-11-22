@@ -14,7 +14,7 @@ export async function GET() {
   const entries = await PasswordEntry.find({ userId: session.userId }).sort({ createdAt: -1 }).lean();
 
   return NextResponse.json({
-    passwords: entries.map((entry) => ({
+    passwords: entries.map((entry: any) => ({
       id: entry._id.toString(),
       label: entry.label,
       username: entry.username,

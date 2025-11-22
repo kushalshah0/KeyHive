@@ -76,9 +76,9 @@ export const getCurrentUser = async () => {
   const user = await User.findById(session.userId).lean();
   if (!user) return null;
   return {
-    id: user._id.toString(),
-    name: user.name,
-    email: user.email,
+    id: (user as any)._id.toString(),
+    name: (user as any).name,
+    email: (user as any).email,
   };
 };
 
